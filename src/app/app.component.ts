@@ -10,8 +10,8 @@ import { TaskCommentsModalComponent } from './components/task-comments-modal/tas
   imports: [
     HeaderComponent,
     MainContentComponent,
-    TaskFormModalComponent,
     TaskCommentsModalComponent,
+    TaskFormModalComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
