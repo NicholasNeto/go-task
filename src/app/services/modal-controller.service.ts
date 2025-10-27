@@ -16,12 +16,18 @@ export class ModalControllerService {
   openNewTaskModal() {
     return this._dialog.open(TaskFormModalComponent, {
       ...this.modalSizeOptions,
+      data: {
+        mode: 'create',
+      },
     });
   }
 
   openEditTaskModal() {
     return this._dialog.open(TaskFormModalComponent, {
       ...this.modalSizeOptions,
+      data: {
+        mode: 'edit',
+      },
     });
   }
 
