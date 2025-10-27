@@ -1,4 +1,9 @@
-<form class="rounded-xl overflow-hidden bg-white" action="">
+<form
+  class="rounded-xl overflow-hidden bg-white"
+  action=""
+  [formGroup]="taskForm"
+  (ngSubmit)="onFormSubmit()"
+>
   <div class="flex gap-1 items-center p-4">
     <img src="images/icon-new-task.svg" />
     <h1 class="font-semibold text-lg">
@@ -18,10 +23,14 @@
       <input
         class="w-full border border-[D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919f]"
         type="text"
+        formControlName="name"
       />
-      <p class="font-semibold text-sm text-red-500">
-        O campo é obrigatorio e precisa ter no minimo 10 caracters
-      </p>
+
+      @if (taskForm.get("name")?.touched && taskForm.get("name")?.invalid) {
+        <p class="font-semibold text-sm text-red-500">
+          O campo é obrigatorio e precisa ter no minimo 10 caracters
+        </p>
+      }
     </div>
 
     <div>
@@ -35,10 +44,17 @@
       <input
         class="w-full border border-[D1D5DB] p-3 rounded-lg text-sm font-light text-[#89919f]"
         type="text"
+        formControlName="description"
       />
-      <p class="font-semibold text-sm text-red-500">
-        O campo é obrigatorio e precisa ter no minimo 10 caracters
-      </p>
+
+      @if (
+        taskForm.get("description")?.touched &&
+        taskForm.get("description")?.invalid
+      ) {
+        <p class="font-semibold text-sm text-red-500">
+          O campo é obrigatorio e precisa ter no minimo 10 caracters
+        </p>
+      }
     </div>
   </div>
   <div class="p-4 flex justify-end gap-2">
@@ -49,10 +65,15 @@
       Cancelar
     </button>
     <button
-      class="py-3 px-4 bg-[#2A89EF] text-white rounded-xl text-sm font-semibold cursor-pointer active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50"
+      class="{{`py-3 px-4 text-white rounded-xl text-sm font-semibold cursor-pointer ${
+        taskForm.invalid ? 'bg-[#D7D8D8]': 'bg-[#2A89EF] active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50'
+      }` }} "
       type="submit"
+      [disabled]="taskForm.invalid"
     >
       {{ _data.mode === "create" ? "Criar uma tarefa" : "Salvar atualizações" }}
     </button>
   </div>
 </form>
+
+<!-- class="py-3 px-4 bg-[#2A89EF] text-white rounded-xl text-sm font-semibold cursor-pointer active:translate-y-1 transition-transform duration-75 shadow-md shadow-blue-500/50"  -->
