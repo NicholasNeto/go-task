@@ -11,21 +11,21 @@ import { generateUniqueIdWithTimestamp } from '../utils/generate-unique-id-with-
 export class TaskService {
   // Tarefas todo
 
-  private todoTask$ = new BehaviorSubject<ITask[]>([]);
-  readonly todoTask = this.todoTask$
+  private todoTasks$ = new BehaviorSubject<ITask[]>([]);
+  readonly todoTasks = this.todoTasks$
     .asObservable()
     .pipe(map((tasksList) => structuredClone(tasksList)));
 
   // Tarefas in progresse
-  private doingTask$ = new BehaviorSubject<ITask[]>([]);
-  readonly doingTask = this.doingTask$
+  private doingTasks$ = new BehaviorSubject<ITask[]>([]);
+  readonly doingTasks = this.doingTasks$
     .asObservable()
     .pipe(map((tasksList) => structuredClone(tasksList)));
 
   // Tarefas done
 
-  private doneTask$ = new BehaviorSubject<ITask[]>([]);
-  readonly doneTask = this.doneTask$
+  private doneTasks$ = new BehaviorSubject<ITask[]>([]);
+  readonly doneTasks = this.doneTasks$
     .asObservable()
     .pipe(map((tasksList) => structuredClone(tasksList)));
 
@@ -39,12 +39,12 @@ export class TaskService {
       comments: [],
     };
 
-    const currenList = this.todoTask$.value;
-    return this.todoTask$.next([...currenList, newTask]);
+    const currenList = this.todoTasks$.value;
+    return this.todoTasks$.next([...currenList, newTask]);
   }
 
   carregarListaFontedeVerdade() {
-    console.log(' TaskService LISTA todoTask$', this.todoTask$.value);
+    console.log(' TaskService LISTA todoTask$', this.todoTasks$.value);
   }
 
   openEditTaskModal() {

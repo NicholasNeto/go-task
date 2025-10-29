@@ -1,3 +1,7 @@
+@let todoTasks = ( this._taskService.todoTasks | async ) ?? [];
+@let doingTasks = ( this._taskService.doingTasks | async ) ?? [];
+@let doneTasks = ( this._taskService.doneTasks | async ) ?? [];
+
 <div class="p-3 mb-6 flex overflow-x-auto scrollbar-hidden">
   <!-- Coluna a Fazer  -->
   <div
@@ -38,7 +42,7 @@
       >
     </div>
     <div class="flex flex-col gap-4">
-      @for (todoTask of doingTasks; track todoTask.id) {
+      @for (doingTask of doingTasks; track doingTask.id) {
         <app-task-card cdkDrag />
       }
     </div>
@@ -60,7 +64,7 @@
       >
     </div>
     <div class="flex flex-col gap-4">
-      @for (todoTask of doneTasks; track todoTask.id) {
+      @for (doneTask of doneTasks; track doneTask.id) {
         <app-task-card cdkDrag />
       }
     </div>
