@@ -4,6 +4,7 @@ import { ITask } from '../interfaces/task.interface';
 import { ITaskFormControls } from '../interfaces/task-form-controls.interface';
 import { TaskStatusEnum } from '../enums/task-status.enum';
 import { generateUniqueIdWithTimestamp } from '../utils/generate-unique-id-with-timestamp';
+import { TaskStatus } from '../types/task-status';
 
 @Injectable({
   providedIn: 'root',
@@ -43,15 +44,35 @@ export class TaskService {
     return this.todoTasks$.next([...currenList, newTask]);
   }
 
-  carregarListaFontedeVerdade() {
-    console.log(' TaskService LISTA todoTask$', this.todoTasks$.value);
+  updateTaskStatus(
+    taskId: string,
+    taskCurrentStatus: TaskStatus,
+    taskNextStatus: TaskStatus,
+  ) {
+    const currentTaskList = this.getTaskListByStatus(taskCurrentStatus);
+    const nextTaskList = this.getTaskListByStatus(taskNextStatus);
+    const currentTask = currentTaskList.value.find(
+      (task) => task.id === taskId,
+    );
+
+    if (currentTask) {
+      currentTask.status = taskNextStatus;
+
+      const currentTaskListWithoutTask = currentTaskList.value.filter(
+        (task) => task.id !== taskId,
+      );
+      this.todoTasks$.next([...currentTaskListWithoutTask]);
+      this.todoTasks$.next([...nextTaskList.value, { ...currentTask }]);
+    }
   }
 
-  openEditTaskModal() {
-    return '';
-  }
+  private getTaskListByStatus(taskStatus: TaskStatus) {
+    const taskListObj = {
+      [TaskStatusEnum.TODO]: this.todoTasks$,
+      [TaskStatusEnum.DOING]: this.doingTasks$,
+      [TaskStatusEnum.DONE]: this.doneTasks$,
+    };
 
-  openTaskCommentsModal() {
-    return '';
+    return taskListObj[taskStatus];
   }
 }

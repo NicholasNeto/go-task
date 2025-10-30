@@ -9,7 +9,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { ITask } from '../../interfaces/task.interface';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { TaskStatus } from '../../types/task-status';
 import { TaskStatusEnum } from '../../enums/task-status.enum';
 
@@ -52,6 +52,12 @@ export class TaskListSectionComponent {
       default:
         throw new Error('Coluna não identificada');
     }
+
+    this._taskService.updateTaskStatus(
+      taskId,
+      taskCurrentStatus,
+      taskNextStatus,
+    );
   }
 
   moveCardToColumn(event: CdkDragDrop<ITask[]>) {
