@@ -61,8 +61,8 @@ export class TaskService {
       const currentTaskListWithoutTask = currentTaskList.value.filter(
         (task) => task.id !== taskId,
       );
-      this.todoTasks$.next([...currentTaskListWithoutTask]);
-      this.todoTasks$.next([...nextTaskList.value, { ...currentTask }]);
+      currentTaskList.next([...currentTaskListWithoutTask]);
+      nextTaskList.next([...nextTaskList.value, { ...currentTask }]);
     }
   }
 
