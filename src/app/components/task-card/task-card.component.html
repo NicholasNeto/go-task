@@ -1,6 +1,6 @@
 <div class="p-3 bg-[#FAFAFA] rounded-xl cursor-grab flex flex-col gap-3">
   <div class="flex gap-1">
-    <p class="font-bold">Minha Nova tarefa</p>
+    <p class="font-bold">{{ task.name }}</p>
     <img
       class="self-start cursor-pointer ml-auto"
       src="images/icon-delete.svg"
@@ -8,14 +8,14 @@
     />
   </div>
   <p class="font-light text-sm">
-    Essa é minha tarefa para criar uma aplicação angular
+    {{ task.description }}
   </p>
   <div class="flex items-center gap-1">
     <img src="images/icon-comments.svg" alt="" />
     <p
       class="font-semibold text-xs text-[#2a89ef] underline underline-offset-2 cursor-pointer"
     >
-      2 Comentarios
+      {{ task.comments.length }} Comentarios
     </p>
     <p
       class="font-semibold text-xs text-[#2a89ef] underline underline-offset-2 cursor-pointer ml-auto"
