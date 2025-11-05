@@ -121,4 +121,10 @@ export class TaskService {
       currentTaskList.next(updatedTaskList);
     }
   }
+
+  deleteTask(id: string, status: TaskStatusEnum) {
+    const currentTaskList = this.getTaskListByStatus(status);
+    const newTaskList = currentTaskList.value.filter((it) => it.id !== id);
+    currentTaskList.next(newTaskList);
+  }
 }
