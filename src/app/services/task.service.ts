@@ -75,4 +75,27 @@ export class TaskService {
 
     return taskListObj[taskStatus];
   }
+
+  updateTaskNameAndDescription(
+    taskId: string,
+    taskCurrentStatus: TaskStatus,
+    newTaskName: string,
+    newTaskDescription: string,
+  ) {
+    const currentTaskList = this.getTaskListByStatus(taskCurrentStatus);
+    const currentTaskIndex = currentTaskList.value.findIndex(
+      (task) => task.id === taskId,
+    );
+    if (currentTaskIndex > -1) {
+      const updatedTaskList = [...currentTaskList.value];
+
+      updatedTaskList[currentTaskIndex] = {
+        ...updatedTaskList[currentTaskIndex],
+        name: newTaskName,
+        description: newTaskDescription,
+      };
+
+      currentTaskList.next(updatedTaskList);
+    }
+  }
 }
