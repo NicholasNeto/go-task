@@ -16,7 +16,6 @@ export class WelcomeSectionComponent {
     const dialogRef = this._modalControllerService.openNewTaskModal();
 
     dialogRef.closed.subscribe((taskForm) => {
-      console.log('taskForm', taskForm);
       if (taskForm) {
         this._taskService.addTask(taskForm);
       }

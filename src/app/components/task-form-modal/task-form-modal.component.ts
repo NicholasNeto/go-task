@@ -31,7 +31,6 @@ export class TaskFormModalComponent {
   });
 
   onFormSubmit() {
-    console.log(this.taskForm);
     this.closeModal(this.taskForm.value);
   }
 

@@ -61,7 +61,6 @@ export class TaskListSectionComponent {
   }
 
   moveCardToColumn(event: CdkDragDrop<ITask[]>) {
-    console.log('event', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

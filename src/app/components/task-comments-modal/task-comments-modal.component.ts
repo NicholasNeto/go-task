@@ -21,8 +21,6 @@ export class TaskCommentsModalComponent {
   readonly _dialogRef: DialogRef<boolean> = inject(DialogRef);
 
   onAddComment() {
-    console.log('Comentário: ', this.commentControl.value);
-
     if (this.commentControl.value) {
       const newComment: IComment = {
         id: generateUniqueIdWithTimestamp(),
